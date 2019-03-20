@@ -4,14 +4,19 @@
 
 namespace Microsoft.Integration.Mapper
 {
+    using System.Linq;
     using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Diagnostics.HealthChecks;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Integration.Mapper.Core;
     using Microsoft.Integration.Mapper.Repo;
     using Microsoft.Integraton.Mapper.Health;
+    using Newtonsoft.Json;
+    using Swashbuckle.AspNetCore.Swagger;
 
     /// <summary>
     /// Startup class
@@ -36,10 +41,16 @@ namespace Microsoft.Integration.Mapper
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHealthChecks()
-                .AddCheck<StorageTableHealthCheck>("blob_storage_table_health_check", failureStatus: Extensions.Diagnostics.HealthChecks.HealthStatus.Degraded, tags: new[] { "blob_storage_table" });
+                .AddCheck<StorageTableHealthCheck>("blob_storage_table_health_check", failureStatus: Extensions.Diagnostics.HealthChecks.HealthStatus.Degraded, tags: new[] { "blob_storage_table_health_check" });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddTransient<IKeyValueMapper, KeyValueMapper>();
             services.AddScoped(typeof(IMapperRepository<>), typeof(AzureStorageRepository<>));
+
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "Mapper API", Version = "v1" });
+            });
         }
 
         /// <summary>
@@ -59,7 +70,32 @@ namespace Microsoft.Integration.Mapper
                 app.UseHsts();
             }
 
-            app.UseHealthChecks("/health");
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Mapper API V1");
+            });
+
+            var options = new HealthCheckOptions()
+            {
+                ResponseWriter = async (c, r) =>
+                {
+                    c.Response.ContentType = "application/json";
+
+                    var result = JsonConvert.SerializeObject(new
+                    {
+                        status = r.Status.ToString(),
+                        errors = r.Entries.Select(e => new { key = e.Key, status = e.Value.Status.ToString(), description = e.Value.Description.ToString(System.Globalization.CultureInfo.InvariantCulture) })
+                    });
+                    await c.Response.WriteAsync(result);
+                }
+            };
+
+            app.UseHealthChecks("/health", options);
             app.UseHttpsRedirection();
             app.UseMvc();
         }
