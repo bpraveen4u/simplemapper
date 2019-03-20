@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>KeyValueMapper.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Integration.Mapper.Core.IKeyValueMapper">
+            <summary>
+            IKeyValueMapper interface
+            </summary>
+        </member>
+        <member name="M:Microsoft.Integration.Mapper.Core.IKeyValueMapper.GetByKey(System.String,System.String)">
+            <summary>
+            Get mappings by key
+            </summary>
+            <param name="partition">partition key</param>
+            <param name="key">row key</param>
+            <returns>the mapping</returns>
+        </member>
+        <member name="M:Microsoft.Integration.Mapper.Core.IKeyValueMapper.GetByValue(System.String,System.String)">
+            <summary>
+            Get mappings by value
+            </summary>
+            <param name="partition">partition key</param>
+            <param name="value">value </param>
+            <returns>the mappings</returns>
+        </member>
+        <member name="M:Microsoft.Integration.Mapper.Core.IKeyValueMapper.Save(Microsoft.Integration.Mapper.Contracts.Models.Mapping)">
+            <summary>
+            Save the mappings
+            </summary>
+            <param name="mapping">the mapping</param>
+            <returns>save mappings</returns>
+        </member>
+        <member name="M:Microsoft.Integration.Mapper.Core.IKeyValueMapper.Count(System.String)">
+            <summary>
+            The count by partition
+            </summary>
+            <param name="partitionKey">partition key</param>
+            <returns>the count</returns>
+        </member>
+        <member name="T:Microsoft.Integration.Mapper.Core.KeyValueMapper">
+            <summary>
+            The key value mapper
+            </summary>
+        </member>
+        <member name="M:Microsoft.Integration.Mapper.Core.KeyValueMapper.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Integration.Mapper.Repo.IMapperRepository{Microsoft.Integration.Mapper.Contracts.Models.Mapping})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Integration.Mapper.Core.KeyValueMapper"/> class.
+            </summary>
+            <param name="config">config object</param>
+            <param name="mapperRepository">repository object</param>
+        </member>
+        <member name="M:Microsoft.Integration.Mapper.Core.KeyValueMapper.Count(System.String)">
+            <summary>
+            The count by partition
+            </summary>
+            <param name="partitionKey">the partition key</param>
+            <returns>the count of values</returns>
+        </member>
+        <member name="M:Microsoft.Integration.Mapper.Core.KeyValueMapper.GetByKey(System.String,System.String)">
+            <summary>
+            Get Mapings By Key
+            </summary>
+            <param name="partition">the partition</param>
+            <param name="key">the key</param>
+            <returns>the mappings</returns>
+        </member>
+        <member name="M:Microsoft.Integration.Mapper.Core.KeyValueMapper.GetByValue(System.String,System.String)">
+            <summary>
+            Get Mapings By value
+            </summary>
+            <param name="partition">the partition</param>
+            <param name="value">the value</param>
+            <returns>the mappings</returns>
+        </member>
+        <member name="M:Microsoft.Integration.Mapper.Core.KeyValueMapper.Save(Microsoft.Integration.Mapper.Contracts.Models.Mapping)">
+            <summary>
+            Save the mapping
+            </summary>
+            <param name="mapping">the mapping</param>
+            <returns>the save mapping</returns>
+        </member>
+    </members>
+</doc>

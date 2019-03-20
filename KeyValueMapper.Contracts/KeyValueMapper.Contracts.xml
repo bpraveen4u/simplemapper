@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>KeyValueMapper.Contracts</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Integration.Mapper.Contracts.Models.Mapping">
+            <summary>
+            The Mapping Class
+            </summary>
+        </member>
+        <member name="P:Microsoft.Integration.Mapper.Contracts.Models.Mapping.PartitionKey">
+            <summary>Gets or sets the partition key.</summary>
+            <value>The partition key.</value>
+        </member>
+        <member name="P:Microsoft.Integration.Mapper.Contracts.Models.Mapping.RowKey">
+            <summary>Gets or sets the row key.</summary>
+            <value>The row key.</value>
+        </member>
+        <member name="P:Microsoft.Integration.Mapper.Contracts.Models.Mapping.Value">
+            <summary>
+            Gets or sets the value.
+            </summary>
+        </member>
+    </members>
+</doc>

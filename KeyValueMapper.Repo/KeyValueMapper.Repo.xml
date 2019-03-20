@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>KeyValueMapper.Repo</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Integration.Mapper.Repo.AzureStorageRepository`1">
+            <summary>
+            Azure Storage Repository
+            </summary>
+            <typeparam name="T">type parameter</typeparam>
+        </member>
+        <member name="M:Microsoft.Integration.Mapper.Repo.AzureStorageRepository`1.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Integration.Mapper.Repo.AzureStorageRepository`1"/> class.
+            </summary>
+            <param name="config">the configuration instance</param>
+        </member>
+        <member name="M:Microsoft.Integration.Mapper.Repo.AzureStorageRepository`1.Count(System.String)">
+            <summary>
+            The count of records
+            </summary>
+            <param name="partitionKey">the partition key</param>
+            <returns>count of records</returns>
+        </member>
+        <member name="M:Microsoft.Integration.Mapper.Repo.AzureStorageRepository`1.GetByKey(System.String,System.String)">
+            <summary>
+            Get mappings by Key
+            </summary>
+            <param name="partition">the partition</param>
+            <param name="key">the key</param>
+            <returns>the mappings</returns>
+        </member>
+        <member name="M:Microsoft.Integration.Mapper.Repo.AzureStorageRepository`1.GetByValue(System.String,System.String)">
+            <summary>
+            Get the mapping by value
+            </summary>
+            <param name="partition">the partionkey</param>
+            <param name="value">the value</param>
+            <returns>the mappings</returns>
+        </member>
+        <member name="M:Microsoft.Integration.Mapper.Repo.AzureStorageRepository`1.Save(`0)">
+            <summary>
+            Saves the mapping
+            </summary>
+            <param name="mapping">the mapping object</param>
+            <returns>the saved object</returns>
+        </member>
+        <member name="T:Microsoft.Integration.Mapper.Repo.Entities.MapperStorageEntity">
+            <summary>
+            Mapper Storage Entity
+            </summary>
+        </member>
+        <member name="P:Microsoft.Integration.Mapper.Repo.Entities.MapperStorageEntity.Value">
+            <summary>
+            Gets or sets the value
+            </summary>
+        </member>
+        <member name="T:Microsoft.Integration.Mapper.Repo.IMapperRepository`1">
+            <summary>
+            Mapper Repository
+            </summary>
+            <typeparam name="T">Type parameter</typeparam>
+        </member>
+        <member name="M:Microsoft.Integration.Mapper.Repo.IMapperRepository`1.GetByKey(System.String,System.String)">
+            <summary>
+            Get the values by partition and key
+            </summary>
+            <param name="partition">partition key</param>
+            <param name="key">row key</param>
+            <returns>the value</returns>
+        </member>
+        <member name="M:Microsoft.Integration.Mapper.Repo.IMapperRepository`1.GetByValue(System.String,System.String)">
+            <summary>
+            Get the keys by partition and value
+            </summary>
+            <param name="partition">partition key</param>
+            <param name="value">the value</param>
+            <returns>value/key combinations</returns>
+        </member>
+        <member name="M:Microsoft.Integration.Mapper.Repo.IMapperRepository`1.Save(`0)">
+            <summary>
+            Saves the mappings in persistance store
+            </summary>
+            <param name="mapping">the mapping object</param>
+            <returns>The save object</returns>
+        </member>
+        <member name="M:Microsoft.Integration.Mapper.Repo.IMapperRepository`1.Count(System.String)">
+            <summary>
+            Get the count
+            </summary>
+            <param name="partitionKey">partition key</param>
+            <returns>count of mappings in the partition</returns>
+        </member>
+    </members>
+</doc>
