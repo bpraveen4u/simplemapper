@@ -4,6 +4,7 @@
 
 namespace Microsoft.Integration.Mapper
 {
+    using System;
     using System.Linq;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -16,7 +17,9 @@ namespace Microsoft.Integration.Mapper
     using Microsoft.Integration.Mapper.Contracts.Service;
     using Microsoft.Integration.Mapper.Core;
     using Microsoft.Integration.Mapper.Repo;
+    using Microsoft.Integraton.Mapper.Extensions;
     using Microsoft.Integraton.Mapper.Health;
+    using Microsoft.Integraton.Mapper.Options;
     using Newtonsoft.Json;
     using Swashbuckle.AspNetCore.Swagger;
 
@@ -43,16 +46,27 @@ namespace Microsoft.Integration.Mapper
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHealthChecks()
+                .AddCheck<CosmosDbHealthCheck>("cosmosDb")
                 .AddCheck<StorageTableHealthCheck>("blob_storage_table_health_check", failureStatus: Extensions.Diagnostics.HealthChecks.HealthStatus.Degraded, tags: new[] { "blob_storage_table_health_check" });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddTransient<IKeyValueMapper, KeyValueMapper>();
             services.AddScoped(typeof(IMapperRepository<>), typeof(AzureStorageRepository<>));
+
+            var cosmosDbOptions = this.Configuration.GetSection("CosmosDb").Get<CosmosDbOptions>();
+            var (databaseName, collectionData) = cosmosDbOptions;
+            var collectionNames = collectionData.Select(c => c.Name).ToList();
+
+            // Add CosmosDb. This verifies database and collections existence.
+            services.AddCosmosDb(new Uri(this.Configuration["ConnectionStrings:ServiceEndpoint"]), this.Configuration["ConnectionStrings:AuthKey"], this.Configuration["CosmosDb:DatabaseName"], collectionNames);
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Mapper API", Version = "v1" });
             });
+
+            services.AddScoped<IKeyValueMapperRepository, KeyValueMapperRepository>();
         }
 
         /// <summary>
