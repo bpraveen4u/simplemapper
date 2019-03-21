@@ -1,0 +1,275 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Integration.Infrastructure</name>
+    </assembly>
+    <members>
+        <member name="T:Integration.Infrastructure.Data.CosmosDbClient">
+            <summary>
+            CosmosDbClient class
+            </summary>
+        </member>
+        <member name="M:Integration.Infrastructure.Data.CosmosDbClient.#ctor(System.String,System.String,Microsoft.Azure.Documents.IDocumentClient)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Integration.Infrastructure.Data.CosmosDbClient"/> class.
+            </summary>
+            <param name="databaseName">database name</param>
+            <param name="collectionName">collection name</param>
+            <param name="documentClient">document client</param>
+        </member>
+        <member name="M:Integration.Infrastructure.Data.CosmosDbClient.ReadDocumentAsync(System.String,Microsoft.Azure.Documents.Client.RequestOptions,System.Threading.CancellationToken)">
+            <summary>
+            Read Document Async
+            </summary>
+            <param name="documentId">document Id</param>
+            <param name="options">options</param>
+            <param name="cancellationToken">cancellation token</param>
+            <returns>the document</returns>
+        </member>
+        <member name="M:Integration.Infrastructure.Data.CosmosDbClient.CreateDocumentAsync(System.Object,Microsoft.Azure.Documents.Client.RequestOptions,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Create DocumentAsync
+            </summary>
+            <param name="document">document</param>
+            <param name="options">options</param>
+            <param name="disableAutomaticIdGeneration">Disable Automatic Id generation</param>
+            <param name="cancellationToken">cancellation token</param>
+            <returns>the document</returns>
+        </member>
+        <member name="M:Integration.Infrastructure.Data.CosmosDbClient.ReplaceDocumentAsync(System.String,System.Object,Microsoft.Azure.Documents.Client.RequestOptions,System.Threading.CancellationToken)">
+            <summary>
+            Replace the document
+            </summary>
+            <param name="documentId">the document id</param>
+            <param name="document">document</param>
+            <param name="options">options</param>
+            <param name="cancellationToken">cancellation token</param>
+            <returns>The document</returns>
+        </member>
+        <member name="M:Integration.Infrastructure.Data.CosmosDbClient.DeleteDocumentAsync(System.String,Microsoft.Azure.Documents.Client.RequestOptions,System.Threading.CancellationToken)">
+            <summary>
+            Delete the documents
+            </summary>
+            <param name="documentId">the document id</param>
+            <param name="options">the options</param>
+            <param name="cancellationToken">cancellation token</param>
+            <returns>The document</returns>
+        </member>
+        <member name="T:Integration.Infrastructure.Data.CosmosDbClientFactory">
+            <summary>
+            CosmosDbClientFactory class
+            </summary>
+        </member>
+        <member name="M:Integration.Infrastructure.Data.CosmosDbClientFactory.#ctor(System.String,System.Collections.Generic.List{System.String},Microsoft.Azure.Documents.IDocumentClient)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Integration.Infrastructure.Data.CosmosDbClientFactory"/> class.
+            </summary>
+            <param name="databaseName">database name</param>
+            <param name="collectionNames">collection names</param>
+            <param name="documentClient">document client</param>
+        </member>
+        <member name="M:Integration.Infrastructure.Data.CosmosDbClientFactory.GetClient(System.String)">
+            <summary>
+            Get Client method
+            </summary>
+            <param name="collectionName">collection name</param>
+            <returns>the comosdb Client</returns>
+        </member>
+        <member name="M:Integration.Infrastructure.Data.CosmosDbClientFactory.EnsureDbSetupAsync">
+            <summary>
+            EnsureDbSetup Async
+            </summary>
+            <returns>the task</returns>
+        </member>
+        <member name="T:Integration.Infrastructure.Data.CosmosDbRepository`1">
+            <summary>
+            The Cosmos Db Repository
+            </summary>
+            <typeparam name="T">the Entity</typeparam>
+        </member>
+        <member name="F:Integration.Infrastructure.Data.CosmosDbRepository`1.cosmosDbClientFactory">
+            <summary>
+            Cosmos DB factory
+            </summary>
+        </member>
+        <member name="M:Integration.Infrastructure.Data.CosmosDbRepository`1.#ctor(Integration.Infrastructure.Contracts.ICosmosDbClientFactory)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Integration.Infrastructure.Data.CosmosDbRepository`1"/> class.
+            </summary>
+            <param name="cosmosDbClientFactory">CosmosDbRepository</param>
+        </member>
+        <member name="P:Integration.Infrastructure.Data.CosmosDbRepository`1.CollectionName">
+            <summary>
+            Gets the collection name
+            </summary>
+        </member>
+        <member name="M:Integration.Infrastructure.Data.CosmosDbRepository`1.GetByIdAsync(System.String)">
+            <summary>
+            GetById Async
+            </summary>
+            <param name="id">id</param>
+            <returns>the entity</returns>
+        </member>
+        <member name="M:Integration.Infrastructure.Data.CosmosDbRepository`1.AddAsync(`0)">
+            <summary>
+            Add the entity
+            </summary>
+            <param name="entity">the entity</param>
+            <returns>added entity</returns>
+        </member>
+        <member name="M:Integration.Infrastructure.Data.CosmosDbRepository`1.UpdateAsync(`0)">
+            <summary>
+            Updates the entity
+            </summary>
+            <param name="entity">the entity</param>
+            <returns>task</returns>
+        </member>
+        <member name="M:Integration.Infrastructure.Data.CosmosDbRepository`1.DeleteAsync(`0)">
+            <summary>
+            Delets the entity
+            </summary>
+            <param name="entity">the entity</param>
+            <returns>task</returns>
+        </member>
+        <member name="M:Integration.Infrastructure.Data.CosmosDbRepository`1.GenerateId(`0)">
+            <summary>
+            The GenerateId method
+            </summary>
+            <param name="entity">the entity</param>
+            <returns>guid</returns>
+        </member>
+        <member name="M:Integration.Infrastructure.Data.CosmosDbRepository`1.ResolvePartitionKey(System.String)">
+            <summary>
+            Resolve Partition Key
+            </summary>
+            <param name="entityId">the entityId</param>
+            <returns>the partition key</returns>
+        </member>
+        <member name="T:Integration.Infrastructure.Contracts.ICosmosDbClient">
+            <summary>
+            ICosmosDbClient interface
+            </summary>
+        </member>
+        <member name="M:Integration.Infrastructure.Contracts.ICosmosDbClient.ReadDocumentAsync(System.String,Microsoft.Azure.Documents.Client.RequestOptions,System.Threading.CancellationToken)">
+            <summary>
+            Read Document Async
+            </summary>
+            <param name="documentId">document Id</param>
+            <param name="options">options</param>
+            <param name="cancellationToken">cancellation token</param>
+            <returns>the document</returns>
+        </member>
+        <member name="M:Integration.Infrastructure.Contracts.ICosmosDbClient.CreateDocumentAsync(System.Object,Microsoft.Azure.Documents.Client.RequestOptions,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Create DocumentAsync
+            </summary>
+            <param name="document">document</param>
+            <param name="options">options</param>
+            <param name="disableAutomaticIdGeneration">Disable Automatic Id generation</param>
+            <param name="cancellationToken">cancellation token</param>
+            <returns>the document</returns>
+        </member>
+        <member name="M:Integration.Infrastructure.Contracts.ICosmosDbClient.ReplaceDocumentAsync(System.String,System.Object,Microsoft.Azure.Documents.Client.RequestOptions,System.Threading.CancellationToken)">
+            <summary>
+            Replace the document
+            </summary>
+            <param name="documentId">the document id</param>
+            <param name="document">document</param>
+            <param name="options">options</param>
+            <param name="cancellationToken">cancellation token</param>
+            <returns>The document</returns>
+        </member>
+        <member name="M:Integration.Infrastructure.Contracts.ICosmosDbClient.DeleteDocumentAsync(System.String,Microsoft.Azure.Documents.Client.RequestOptions,System.Threading.CancellationToken)">
+            <summary>
+            Delete the documents
+            </summary>
+            <param name="documentId">the document id</param>
+            <param name="options">the options</param>
+            <param name="cancellationToken">cancellation token</param>
+            <returns>The document</returns>
+        </member>
+        <member name="T:Integration.Infrastructure.Contracts.ICosmosDbClientFactory">
+            <summary>
+            ICosmosDbClientFactory interface
+            </summary>
+        </member>
+        <member name="M:Integration.Infrastructure.Contracts.ICosmosDbClientFactory.GetClient(System.String)">
+            <summary>
+            Get Client method
+            </summary>
+            <param name="collectionName">collection name</param>
+            <returns>the document client</returns>
+        </member>
+        <member name="T:Integration.Infrastructure.Contracts.IDocumentCollectionContext`1">
+            <summary>
+            IDocumentCollectionContext interface
+            </summary>
+            <typeparam name="T">the entity</typeparam>
+        </member>
+        <member name="P:Integration.Infrastructure.Contracts.IDocumentCollectionContext`1.CollectionName">
+            <summary>
+            Gets the collection name
+            </summary>
+        </member>
+        <member name="M:Integration.Infrastructure.Contracts.IDocumentCollectionContext`1.GenerateId(`0)">
+            <summary>
+            Generate the id
+            </summary>
+            <param name="entity">the entity</param>
+            <returns>guid</returns>
+        </member>
+        <member name="M:Integration.Infrastructure.Contracts.IDocumentCollectionContext`1.ResolvePartitionKey(System.String)">
+            <summary>
+            Resolve PartitionKey
+            </summary>
+            <param name="entityId">the entity id</param>
+            <returns>Resolved PartitionKey</returns>
+        </member>
+        <member name="T:Integration.Infrastructure.Exceptions.EntityAlreadyExistsException">
+            <summary>
+            EntityAlreadyExistsException class
+            </summary>
+        </member>
+        <member name="M:Integration.Infrastructure.Exceptions.EntityAlreadyExistsException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Integration.Infrastructure.Exceptions.EntityAlreadyExistsException"/> class.
+            </summary>
+        </member>
+        <member name="M:Integration.Infrastructure.Exceptions.EntityAlreadyExistsException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Integration.Infrastructure.Exceptions.EntityAlreadyExistsException"/> class.
+            </summary>
+            <param name="message">the message</param>
+        </member>
+        <member name="M:Integration.Infrastructure.Exceptions.EntityAlreadyExistsException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Integration.Infrastructure.Exceptions.EntityAlreadyExistsException"/> class.
+            </summary>
+            <param name="message">the message</param>
+            <param name="innerException">inner exception</param>
+        </member>
+        <member name="T:Integration.Infrastructure.Exceptions.EntityNotFoundException">
+            <summary>
+            EntityNotFoundException class
+            </summary>
+        </member>
+        <member name="M:Integration.Infrastructure.Exceptions.EntityNotFoundException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Integration.Infrastructure.Exceptions.EntityNotFoundException"/> class.
+            </summary>
+        </member>
+        <member name="M:Integration.Infrastructure.Exceptions.EntityNotFoundException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Integration.Infrastructure.Exceptions.EntityNotFoundException"/> class.
+            </summary>
+            <param name="message">the exception message</param>
+        </member>
+        <member name="M:Integration.Infrastructure.Exceptions.EntityNotFoundException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Integration.Infrastructure.Exceptions.EntityNotFoundException"/> class.
+            </summary>
+            <param name="message">the mesaage</param>
+            <param name="innerException">inner exception</param>
+        </member>
+    </members>
+</doc>
