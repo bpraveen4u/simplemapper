@@ -11,6 +11,7 @@ namespace Microsoft.Integration.Mapper.Repo
     using System.Net;
     using System.Threading.Tasks;
     using Microsoft.Extensions.Configuration;
+    using Microsoft.Integration.Mapper.Contracts.Repo;
     using Microsoft.Integration.Mapper.Repo.Entities;
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.Table;

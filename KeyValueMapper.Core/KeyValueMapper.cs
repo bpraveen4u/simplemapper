@@ -10,7 +10,8 @@ namespace Microsoft.Integration.Mapper.Core
     using System.Threading.Tasks;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Integration.Mapper.Contracts.Models;
-    using Microsoft.Integration.Mapper.Repo;
+    using Microsoft.Integration.Mapper.Contracts.Repo;
+    using Microsoft.Integration.Mapper.Contracts.Service;
 
     /// <summary>
     /// The key value mapper

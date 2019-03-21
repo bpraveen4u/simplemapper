@@ -7,6 +7,8 @@
     <UserSecretsId>f0bafed7-11f4-47ff-9367-b2d3af06854a</UserSecretsId>
     <AssemblyName>Microsoft.Integraton.Mapper</AssemblyName>
     <RootNamespace>Microsoft.Integraton.Mapper</RootNamespace>
+    <ApplicationInsightsResourceId>/subscriptions/1ca4fe2c-2fe0-4cb2-b4a1-79a56ced3238/resourcegroups/Default-ApplicationInsights-EastUS/providers/microsoft.insights/components/KeyValueMapper</ApplicationInsightsResourceId>
+    <ApplicationInsightsAnnotationResourceId>/subscriptions/1ca4fe2c-2fe0-4cb2-b4a1-79a56ced3238/resourcegroups/Default-ApplicationInsights-EastUS/providers/microsoft.insights/components/KeyValueMapper</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.3">
@@ -31,10 +34,6 @@
 
   <ItemGroup>
     <WCFMetadata Include="Connected Services" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Connected Services\" />
   </ItemGroup>
 
   <ItemGroup>

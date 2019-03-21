@@ -28,6 +28,7 @@ namespace Microsoft.Integration.Mapper
         /// <returns>WebHost Builder</returns>
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseApplicationInsights()
                 .UseStartup<Startup>();
     }
 }

@@ -9,7 +9,7 @@ namespace Microsoft.Integration.Mapper.Controllers
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Integration.Mapper.Contracts.Models;
-    using Microsoft.Integration.Mapper.Core;
+    using Microsoft.Integration.Mapper.Contracts.Service;
 
     [Route("api/map")]
     [ApiController]

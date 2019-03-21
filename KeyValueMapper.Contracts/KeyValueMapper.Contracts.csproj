@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
+    <RootNamespace>Microsoft.Integration.Mapper.Contracts</RootNamespace>
+    <AssemblyName>Microsoft.Integration.Mapper.Contracts</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

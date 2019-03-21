@@ -2,7 +2,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // </copyright>
 
-namespace Microsoft.Integration.Mapper.Repo
+namespace Microsoft.Integration.Mapper.Contracts.Repo
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;

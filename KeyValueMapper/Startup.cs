@@ -12,6 +12,8 @@ namespace Microsoft.Integration.Mapper
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Integration.Mapper.Contracts.Repo;
+    using Microsoft.Integration.Mapper.Contracts.Service;
     using Microsoft.Integration.Mapper.Core;
     using Microsoft.Integration.Mapper.Repo;
     using Microsoft.Integraton.Mapper.Health;

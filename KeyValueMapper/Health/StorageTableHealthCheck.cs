@@ -9,7 +9,7 @@ namespace Microsoft.Integraton.Mapper.Health
     using System.Threading.Tasks;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.Diagnostics.HealthChecks;
-    using Microsoft.Integration.Mapper.Core;
+    using Microsoft.Integration.Mapper.Contracts.Service;
 
     /// <summary>
     /// Storage Table Health Check
