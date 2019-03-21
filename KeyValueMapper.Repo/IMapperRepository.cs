@@ -1,5 +1,5 @@
-﻿// <copyright file="IMapperRepository.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+﻿// <copyright file="IMapperRepository.cs" company="Microsoft">
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // </copyright>
 
 namespace Microsoft.Integration.Mapper.Repo

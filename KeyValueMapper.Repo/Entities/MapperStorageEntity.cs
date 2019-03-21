@@ -1,5 +1,5 @@
-﻿// <copyright file="MapperStorageEntity.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+﻿// <copyright file="MapperStorageEntity.cs" company="Microsoft">
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // </copyright>
 
 namespace Microsoft.Integration.Mapper.Repo.Entities

@@ -1,5 +1,5 @@
-﻿// <copyright file="StorageTableHealthCheck.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+﻿// <copyright file="StorageTableHealthCheck.cs" company="Microsoft">
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // </copyright>
 
 namespace Microsoft.Integraton.Mapper.Health

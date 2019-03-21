@@ -1,5 +1,5 @@
-﻿// <copyright file="GlobalSuppressions.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+﻿// <copyright file="GlobalSuppressions.cs" company="Microsoft">
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // </copyright>
 
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Required", Scope = "member", Target = "~M:Microsoft.Integration.Mapper.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)")]
