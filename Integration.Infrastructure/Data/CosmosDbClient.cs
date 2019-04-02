@@ -5,11 +5,15 @@
 namespace Integration.Infrastructure.Data
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Linq.Expressions;
     using System.Threading;
     using System.Threading.Tasks;
     using Integration.Infrastructure.Contracts;
     using Microsoft.Azure.Documents;
     using Microsoft.Azure.Documents.Client;
+    using Microsoft.Azure.Documents.Linq;
 
     /// <summary>
     /// CosmosDbClient class
@@ -43,6 +47,27 @@ namespace Integration.Infrastructure.Data
         public async Task<Document> ReadDocumentAsync(string documentId, RequestOptions options = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             return await this.documentClient.ReadDocumentAsync(UriFactory.CreateDocumentUri(this.databaseName, this.collectionName, documentId), options, cancellationToken).ConfigureAwait(true);
+        }
+
+#pragma warning disable CA1715 // Identifiers should have correct prefix
+        /// <summary>
+        /// Read Document Async
+        /// </summary>
+        /// <typeparam name="dynamic">type param</typeparam>
+        /// <param name="predicate">predicate</param>
+        /// <param name="feedOptions">options</param>
+        /// <returns>the document</returns>
+        public async Task<IEnumerable<dynamic>> QueryDocumentAsync<dynamic>(Expression<Func<dynamic, bool>> predicate, FeedOptions feedOptions = null)
+#pragma warning restore CA1715 // Identifiers should have correct prefix
+        {
+            var query = this.documentClient.CreateDocumentQuery<dynamic>(UriFactory.CreateDocumentCollectionUri(this.databaseName, this.collectionName), feedOptions).Where(predicate).AsDocumentQuery();
+            var results = new List<dynamic>();
+            while (query.HasMoreResults)
+            {
+                results.AddRange(await query.ExecuteNextAsync<dynamic>().ConfigureAwait(true));
+            }
+
+            return results;
         }
 
         /// <summary>

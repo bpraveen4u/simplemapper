@@ -5,6 +5,8 @@
 namespace Integration.Infrastructure.Data
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq.Expressions;
     using System.Net;
     using System.Threading.Tasks;
     using Integration.Infrastructure.Contracts;
@@ -159,5 +161,28 @@ namespace Integration.Infrastructure.Data
         /// <param name="entityId">the entityId</param>
         /// <returns>the partition key</returns>
         public virtual PartitionKey ResolvePartitionKey(string entityId) => null;
+
+        /// <summary>
+        /// Get Items Async
+        /// </summary>
+        /// <param name="predicate">the predicate</param>
+        /// <returns>Items</returns>
+        public async Task<IEnumerable<T>> GetItemsAsync(Expression<Func<T, bool>> predicate)
+        {
+            try
+            {
+                var cosmosDbClient = this.cosmosDbClientFactory.GetClient(this.CollectionName);
+                return await cosmosDbClient.QueryDocumentAsync(predicate, new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true }).ConfigureAwait(true);
+            }
+            catch (DocumentClientException e)
+            {
+                if (e.StatusCode == HttpStatusCode.NotFound)
+                {
+                    throw new EntityNotFoundException();
+                }
+
+                throw;
+            }
+        }
     }
 }

@@ -46,12 +46,12 @@ namespace Microsoft.Integration.Mapper
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHealthChecks()
-                .AddCheck<CosmosDbHealthCheck>("cosmosDb")
-                .AddCheck<StorageTableHealthCheck>("blob_storage_table_health_check", failureStatus: Extensions.Diagnostics.HealthChecks.HealthStatus.Degraded, tags: new[] { "blob_storage_table_health_check" });
+                .AddCheck<CosmosDbHealthCheck>("cosmosDb");
+                ////.AddCheck<StorageTableHealthCheck>("blob_storage_table_health_check", failureStatus: Extensions.Diagnostics.HealthChecks.HealthStatus.Degraded, tags: new[] { "blob_storage_table_health_check" });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddTransient<IKeyValueMapper, KeyValueMapper>();
-            services.AddScoped(typeof(IMapperRepository<>), typeof(AzureStorageRepository<>));
+            ////services.AddScoped(typeof(IMapperRepository<>), typeof(AzureStorageRepository<>));
 
             var cosmosDbOptions = this.Configuration.GetSection("CosmosDb").Get<CosmosDbOptions>();
             var (databaseName, collectionData) = cosmosDbOptions;

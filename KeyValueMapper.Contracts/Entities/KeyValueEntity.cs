@@ -18,5 +18,10 @@ namespace Microsoft.Integration.Mapper.Contracts.Entities
         /// Gets or sets Category
         /// </summary>
         public string Category { get; set; }
+
+        /// <summary>
+        /// Gets or sets Value
+        /// </summary>
+        public string Value { get; set; }
     }
 }

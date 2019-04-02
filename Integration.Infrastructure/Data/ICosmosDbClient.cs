@@ -4,6 +4,9 @@
 
 namespace Integration.Infrastructure.Contracts
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq.Expressions;
     using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.Azure.Documents;
@@ -22,6 +25,15 @@ namespace Integration.Infrastructure.Contracts
         /// <param name="cancellationToken">cancellation token</param>
         /// <returns>the document</returns>
         Task<Document> ReadDocumentAsync(string documentId, RequestOptions options = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Read Document Async
+        /// </summary>
+        /// <typeparam name="T">type param</typeparam>
+        /// <param name="predicate">predicate</param>
+        /// <param name="feedOptions">options</param>
+        /// <returns>the document</returns>
+        Task<IEnumerable<T>> QueryDocumentAsync<T>(Expression<Func<T, bool>> predicate, FeedOptions feedOptions = null);
 
         /// <summary>
         /// Create DocumentAsync

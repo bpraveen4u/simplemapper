@@ -19,14 +19,14 @@ namespace Microsoft.Integration.Mapper.Core
     public class KeyValueMapper : IKeyValueMapper
     {
         private readonly IConfiguration config;
-        private readonly IMapperRepository<Mapping> mapperRepository;
+        private readonly IKeyValueMapperRepository mapperRepository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="KeyValueMapper"/> class.
         /// </summary>
         /// <param name="config">config object</param>
         /// <param name="mapperRepository">repository object</param>
-        public KeyValueMapper(IConfiguration config, IMapperRepository<Mapping> mapperRepository)
+        public KeyValueMapper(IConfiguration config, IKeyValueMapperRepository mapperRepository)
         {
             this.config = config;
             this.mapperRepository = mapperRepository;
@@ -39,7 +39,7 @@ namespace Microsoft.Integration.Mapper.Core
         /// <returns>the count of values</returns>
         public Task<int> Count(string partitionKey)
         {
-            return this.mapperRepository.Count(partitionKey);
+            return Task.FromResult(0); //// this.mapperRepository.Count(partitionKey);
         }
 
         /// <summary>
@@ -56,7 +56,13 @@ namespace Microsoft.Integration.Mapper.Core
                 return null;
             }
 
-            return await this.mapperRepository.GetByKey(partition.ToLowerInvariant(), key).ConfigureAwait(true);
+            var result = await this.mapperRepository.GetItemsAsync(t => t.Category == partition && t.Name == key).ConfigureAwait(true);
+            if (result != null && result.Count() > 0)
+            {
+                return new Mapping() { PartitionKey = result.First().Category, RowKey = result.First().Name, Value = result.First().Value };
+            }
+
+            return null;
         }
 
         /// <summary>
@@ -67,13 +73,20 @@ namespace Microsoft.Integration.Mapper.Core
         /// <returns>the mappings</returns>
         public async Task<List<Mapping>> GetByValue(string partition, string value)
         {
+            var defaultResult = new List<Mapping> { new Mapping() { PartitionKey = partition, RowKey = string.Empty, Value = value } };
             var allowedPartitions = this.config["AppSettings:AllowedPartitions"].Split(',');
             if (!allowedPartitions.Any(p => p.Equals(partition, StringComparison.OrdinalIgnoreCase)))
             {
-                return null;
+                return defaultResult;
             }
 
-            return await this.mapperRepository.GetByValue(partition.ToLowerInvariant(), value).ConfigureAwait(true);
+            var result = await this.mapperRepository.GetItemsAsync(t => t.Category == partition && t.Value == value).ConfigureAwait(true);
+            if (result != null && result.Count() > 0)
+            {
+                return result.Select(r => new Mapping() { PartitionKey = r.Category, RowKey = r.Name, Value = r.Value }).ToList();
+            }
+
+            return defaultResult;
         }
 
         /// <summary>
@@ -89,7 +102,9 @@ namespace Microsoft.Integration.Mapper.Core
                 return null;
             }
 
-            return await this.mapperRepository.Save(mapping).ConfigureAwait(true);
+            var entity = new Contracts.Entities.KeyValueEntity() { Category = mapping.PartitionKey, Name = mapping.RowKey, Value = mapping.Value };
+            var result = await this.mapperRepository.AddAsync(entity).ConfigureAwait(true);
+            return new Mapping() { PartitionKey = result.Category, RowKey = result.Name, Value = result.Value };
         }
     }
 }

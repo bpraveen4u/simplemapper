@@ -26,6 +26,15 @@
             <param name="cancellationToken">cancellation token</param>
             <returns>the document</returns>
         </member>
+        <member name="M:Integration.Infrastructure.Data.CosmosDbClient.QueryDocumentAsync``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},Microsoft.Azure.Documents.Client.FeedOptions)">
+            <summary>
+            Read Document Async
+            </summary>
+            <typeparam name="dynamic">type param</typeparam>
+            <param name="predicate">predicate</param>
+            <param name="feedOptions">options</param>
+            <returns>the document</returns>
+        </member>
         <member name="M:Integration.Infrastructure.Data.CosmosDbClient.CreateDocumentAsync(System.Object,Microsoft.Azure.Documents.Client.RequestOptions,System.Boolean,System.Threading.CancellationToken)">
             <summary>
             Create DocumentAsync
@@ -145,6 +154,13 @@
             <param name="entityId">the entityId</param>
             <returns>the partition key</returns>
         </member>
+        <member name="M:Integration.Infrastructure.Data.CosmosDbRepository`1.GetItemsAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Get Items Async
+            </summary>
+            <param name="predicate">the predicate</param>
+            <returns>Items</returns>
+        </member>
         <member name="T:Integration.Infrastructure.Contracts.ICosmosDbClient">
             <summary>
             ICosmosDbClient interface
@@ -157,6 +173,15 @@
             <param name="documentId">document Id</param>
             <param name="options">options</param>
             <param name="cancellationToken">cancellation token</param>
+            <returns>the document</returns>
+        </member>
+        <member name="M:Integration.Infrastructure.Contracts.ICosmosDbClient.QueryDocumentAsync``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},Microsoft.Azure.Documents.Client.FeedOptions)">
+            <summary>
+            Read Document Async
+            </summary>
+            <typeparam name="T">type param</typeparam>
+            <param name="predicate">predicate</param>
+            <param name="feedOptions">options</param>
             <returns>the document</returns>
         </member>
         <member name="M:Integration.Infrastructure.Contracts.ICosmosDbClient.CreateDocumentAsync(System.Object,Microsoft.Azure.Documents.Client.RequestOptions,System.Boolean,System.Threading.CancellationToken)">

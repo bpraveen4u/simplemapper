@@ -29,8 +29,6 @@ namespace Microsoft.Integration.Mapper.Repo
         public KeyValueMapperRepository(ICosmosDbClientFactory factory, IConfiguration config)
             : base(factory)
         {
-            ////this.client = new DocumentClient(new Uri(EndpointUri), PrimaryKey);
-
             this.config = config;
             this.collectionName = this.config["CosmosDb:MetadataCollectionName"];
         }

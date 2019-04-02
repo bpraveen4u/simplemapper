@@ -4,6 +4,9 @@
 
 namespace Microsoft.Integration.Mapper.Contracts.Infra
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq.Expressions;
     using System.Threading.Tasks;
     using Microsoft.Integration.Mapper.Contracts.Entities;
 
@@ -20,6 +23,13 @@ namespace Microsoft.Integration.Mapper.Contracts.Infra
         /// <param name="id">id</param>
         /// <returns>the entity</returns>
         Task<T> GetByIdAsync(string id);
+
+        /// <summary>
+        /// Get Items Async
+        /// </summary>
+        /// <param name="predicate">the predicate</param>
+        /// <returns>Items</returns>
+        Task<IEnumerable<T>> GetItemsAsync(Expression<Func<T, bool>> predicate);
 
         /// <summary>
         /// Add the entity
